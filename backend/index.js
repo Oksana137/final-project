@@ -5,6 +5,7 @@ import orderRouter from "./routes/orderRouter.js";
 import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRoutes.js";
 import authRouter from "./routes/authRouter.js";
+import productCategoryRouter from "./routes/productCategoryRouter.js";
 import cors from "cors";
 import { errorHandler } from "./middleware/errorHandler.js";
 
@@ -26,6 +27,7 @@ app.use("/orders", orderRouter);
 app.use("/products", productRouter);
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
+app.use("/products/category", productCategoryRouter);
 
 app.use(errorHandler);
 

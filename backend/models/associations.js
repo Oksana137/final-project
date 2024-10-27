@@ -12,6 +12,7 @@ Category.hasMany(Product, {
 
 Product.belongsTo(Category, {
   foreignKey: { allowNull: false, name: "categoryId" },
+  as: "category",
   onDelete: "CASCADE",
 });
 

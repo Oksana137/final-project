@@ -26,11 +26,11 @@ const ProductCard = ({ product }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {product.title.split(" ").slice(0, 3).join(" ")}
+          {product.name.split(" ").slice(0, 3).join(" ")}
         </h2>
         <span>{product.price} &#36;</span>
         <Link to={`/products/category/${product.category}`} className="link">
-          {product.category}
+          {product.category.name}
         </Link>
         <div className="card-actions justify-end">
           {isInCart ? (

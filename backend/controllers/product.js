@@ -1,10 +1,19 @@
 import Product from "../models/Product.js";
+import Category from "../models/Category.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 
 // Get all products
 export const getProducts = async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include: [
+        {
+          model: Category,
+          as: "category",
+          required: true,
+        },
+      ],
+    });
     res.status(200).json(products);
   } catch (err) {
     next(err);

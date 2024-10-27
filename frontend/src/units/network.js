@@ -1,6 +1,9 @@
 const fetchProducts = async (options) => {
   try {
-    const response = await fetch("https://fakestoreapi.com/products", options);
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/products`,
+      options
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -12,10 +15,10 @@ const fetchProducts = async (options) => {
   }
 };
 
-const fetchProductsByCategory = async (options, categoryName) => {
+const fetchProductsByCategory = async (options, categoryId) => {
   try {
     const response = await fetch(
-      `https://fakestoreapi.com/products/category/${categoryName}`,
+      `${import.meta.env.VITE_API_URL}/products/category/${categoryId}`,
       options
     );
     if (!response.ok) {
@@ -32,7 +35,7 @@ const fetchProductsByCategory = async (options, categoryName) => {
 const fetchCategories = async (options) => {
   try {
     const response = await fetch(
-      "https://fakestoreapi.com/products/categories",
+      `${import.meta.env.VITE_API_URL}/categories`,
       options
     );
     if (!response.ok) {
