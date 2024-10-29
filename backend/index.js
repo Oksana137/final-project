@@ -16,8 +16,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    // origin: "http://localhost:5173", 
-    origin: "https://final-project-p09q.onrender.com", 
+    origin: FRONTEND_URI,
     methods: ["GET", "POST"], // Allowed methods
     credentials: true, // If you need to include cookies in the request
   })
