@@ -5,7 +5,7 @@ const SignIn = () => {
   return (
     <AuthForm
       buttonText="Sign In"
-      redirectPath="/products"
+      redirectPath="/orders"
       apiCall={authorize}
       regLink={true}
     />

@@ -20,7 +20,9 @@ const ProductCard = ({ product }) => {
       <figure className="w-full h-3/5">
         <img
           className="w-full h-full object-contain"
-          src={product.image}
+          src={
+            product.image ? import.meta.env.VITE_API_URL + product.image : null
+          }
           alt="Product"
         />
       </figure>
@@ -29,7 +31,7 @@ const ProductCard = ({ product }) => {
           {product.name.split(" ").slice(0, 3).join(" ")}
         </h2>
         <span>{product.price} &#36;</span>
-        <Link to={`/products/category/${product.category}`} className="link">
+        <Link to={`/category/${product.category.id}`} className="link">
           {product.category.name}
         </Link>
         <div className="card-actions justify-end">
@@ -37,7 +39,7 @@ const ProductCard = ({ product }) => {
             <Counter product={product} setIsInCart={setIsInCart} />
           ) : (
             <button
-              className="btn btn-primary"
+              className="btn btn-default"
               onClick={() => {
                 addToCartHandle();
               }}

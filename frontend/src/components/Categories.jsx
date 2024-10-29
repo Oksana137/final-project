@@ -21,7 +21,7 @@ const Categories = () => {
     <div className="flex gap-4 p-8">
       {categories &&
         categories.map((category, index) => (
-          <Link key={index} to={`/products/category/${category.id}`}>
+          <Link key={index} to={`/category/${category.id}`}>
             <button className="btn btn-outline">{category.name}</button>
           </Link>
         ))}

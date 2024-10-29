@@ -16,6 +16,10 @@ const Product = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,

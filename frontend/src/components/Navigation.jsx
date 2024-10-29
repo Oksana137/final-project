@@ -8,23 +8,24 @@ const Navigation = () => {
   return (
     <div className="navbar bg-base-300 pr-8">
       <div className="flex-1">
-        <Link to={"/products"} className="btn btn-ghost text-xl">
+        <Link to={"/"} className="btn btn-ghost text-xl">
           eCommerce
         </Link>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to={"/products"} className="btn btn-ghost">
+            <Link to={"/"} className="btn btn-ghost">
               Home
             </Link>
           </li>
+          <li>
+            <Link to={"/orders"} className="btn btn-ghost">
+              Orders
+            </Link>
+          </li>
         </ul>
-        <Link
-          to={"/products/cart"}
-          role="button"
-          className="btn btn-ghost btn-circle"
-        >
+        <Link to={"/cart"} role="button" className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"

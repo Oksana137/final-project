@@ -16,13 +16,12 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
+        <Route index element={<Products />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="category/:categoryName" element={<Products />} />
         <Route path="login" element={<SignIn />} />
         <Route path="register" element={<SignUp />} />
-        <Route path="products" element={<ProtectedLayout />}>
-          <Route index element={<Products />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="category/:categoryName" element={<Products />} />
-        </Route>
+        <Route path="orders" element={<ProtectedLayout />}></Route>
       </Route>
     )
   );

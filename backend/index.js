@@ -17,10 +17,12 @@ app.use(express.json());
 app.use(
   cors({
     origin: process.env.FRONTEND_URI,
-    methods: ["GET", "POST"], // Allowed methods
-    credentials: true, // If you need to include cookies in the request
+    methods: ["GET", "POST"],
+    credentials: true,
   })
 );
+
+app.use("/img", express.static("img"));
 
 app.use("/categories", categoryRouter);
 app.use("/orders", orderRouter);
