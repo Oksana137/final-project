@@ -1,12 +1,7 @@
-import { useState } from "react";
-import Counter from "./Counter";
-
-const CartRow = ({ product, cartQuantities, setCartQuantities }) => {
-  const [isInCart, setIsInCart] = useState(true);
-
+const ProductOrderRow = ({ product }) => {
   return (
-    isInCart && (
-      <tr key={product.id}>
+    product && (
+      <tr key={product.id} className="bg-white">
         <td>
           <div className="card card-side">
             <figure className="w-36 h-36 shrink-0">
@@ -27,18 +22,11 @@ const CartRow = ({ product, cartQuantities, setCartQuantities }) => {
           </div>
         </td>
         <td>{product.description}</td>
-        <td>
-          <Counter
-            product={product}
-            cartQuantities={cartQuantities}
-            setCartQuantities={setCartQuantities}
-            setIsInCart={setIsInCart}
-          />
-        </td>
-        <td>{product.amount * product.price} &#36;</td>
+        <td>{product.ProductOrders.quantity}</td>
+        <td>{product.ProductOrders.quantity * product.price} &#36;</td>
       </tr>
     )
   );
 };
 
-export default CartRow;
+export default ProductOrderRow;

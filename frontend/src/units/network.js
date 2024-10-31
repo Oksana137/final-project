@@ -49,6 +49,23 @@ const fetchCategories = async (options) => {
   }
 };
 
+const fetchOrders = async (options) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/orders`,
+      options
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const orders = await response.json();
+    return orders;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return false;
+  }
+};
+
 const registrate = async (regData) => {
   try {
     const response = await fetch(
@@ -106,6 +123,7 @@ export {
   fetchProducts,
   fetchProductsByCategory,
   fetchCategories,
+  fetchOrders,
   registrate,
   authorize,
 };

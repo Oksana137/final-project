@@ -35,7 +35,7 @@ export const signIn = async (req, res, next) => {
     const match = await bcrypt.compare(password, existingUser.password);
     if (!match) throw new ErrorResponse("Password is incorrect", 401);
 
-    const token = jwt.sign({ uid: existingUser._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ uid: existingUser.id }, process.env.JWT_SECRET, {
       expiresIn: "30m",
     });
     res.json({ token });
@@ -45,6 +45,6 @@ export const signIn = async (req, res, next) => {
 };
 
 export const getUser = async (req, res, next) => {
-  const user = await User.findById(req.uid);
+  const user = await User.findByPk(req.uid);
   res.json(user);
 };

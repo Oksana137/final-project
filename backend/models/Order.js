@@ -1,28 +1,12 @@
-import { DataTypes, Sequelize } from "sequelize";
-import Product from "./Product.js";
+import { DataTypes } from "sequelize";
 import sequelize from "../db/server.js";
 
 const Order = sequelize.define(
   "Order",
   {
-    // products: [
-    //   {
-    //     productId: {
-    //       type: DataTypes.INTEGER,
-    //       allowNull: false,
-    //       references: { model: Product, key: "id" },
-    //     },
-    //     quantity: { type: DataTypes.FLOAT, allowNull: false },
-    //   },
-    // ],
-    products: {
-      type: DataTypes.JSON,
-      get: function () {
-        return JSON.parse(this.getDataValue("products"));
-      },
-      // set: function (value) {
-      //   return this.setDataValue("products", JSON.stringify(value));
-      // },
+    date: {
+      type: DataTypes.DATEONLY,
+      defaultValue: DataTypes.NOW,
     },
     total: {
       type: DataTypes.INTEGER,

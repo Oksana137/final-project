@@ -11,6 +11,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Orders from "./pages/Orders";
 
 function App() {
   const router = createBrowserRouter(
@@ -21,7 +22,9 @@ function App() {
         <Route path="category/:categoryName" element={<Products />} />
         <Route path="login" element={<SignIn />} />
         <Route path="register" element={<SignUp />} />
-        <Route path="orders" element={<ProtectedLayout />}></Route>
+        <Route path="orders" element={<ProtectedLayout />}>
+          <Route index element={<Orders />} />
+        </Route>
       </Route>
     )
   );

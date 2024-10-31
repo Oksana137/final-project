@@ -1,9 +1,29 @@
 import Order from "../models/Order.js";
+import Category from "../models/Category.js";
+import Product from "../models/Product.js";
 import ErrorReponse from "../utils/ErrorResponse.js";
 
 export const getOrders = async (req, res, next) => {
+  const { uid } = req;
+
   try {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      include: [
+        {
+          model: Product,
+          as: "products",
+          required: true,
+          include: [
+            {
+              model: Category,
+              as: "category",
+              required: true,
+            },
+          ],
+        },
+      ],
+      where: { userId: uid },
+    });
     res.status(200).json(orders);
   } catch (error) {
     next(error);
@@ -13,7 +33,15 @@ export const getOrders = async (req, res, next) => {
 export const getOrderByID = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const order = await Order.findByPk(id);
+    const order = await Order.findByPk(id, {
+      include: [
+        {
+          model: Product,
+          as: "products",
+          required: true,
+        },
+      ],
+    });
     if (!order) {
       throw new ErrorReponse("Order not found.", 404);
     }

@@ -2,6 +2,7 @@ import Category from "./Category.js";
 import Product from "./Product.js";
 import Order from "./Order.js";
 import User from "./User.js";
+import ProductOrders from "./ProductOrders.js";
 
 Category.hasMany(Product, {
   foreignKey: {
@@ -28,7 +29,11 @@ Order.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
+Product.belongsToMany(Order, { through: "ProductOrders", as: "orders" });
+Order.belongsToMany(Product, { through: "ProductOrders", as: "products" });
+
 User.sync();
 Category.sync();
 Product.sync();
 Order.sync();
+ProductOrders.sync();
