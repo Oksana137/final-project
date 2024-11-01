@@ -7,13 +7,16 @@ const fetchProducts = async (options) => {
       options
     );
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
     }
     const products = await response.json();
     return products;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    return false;
+    console.error("Error fetching products:", error.message);
+    throw error;
   }
 };
 
@@ -24,13 +27,16 @@ const fetchProductsByCategory = async (options, categoryId) => {
       options
     );
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
     }
     const products = await response.json();
     return products;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    return false;
+    console.error("Error fetching products by category:", error.message);
+    throw error;
   }
 };
 
@@ -41,13 +47,16 @@ const fetchCategories = async (options) => {
       options
     );
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
     }
     const categories = await response.json();
     return categories;
   } catch (error) {
-    console.error("Error fetching categories:", error);
-    return false;
+    console.error("Error fetching categories:", error.message);
+    throw error;
   }
 };
 
@@ -66,7 +75,7 @@ const fetchOrders = async (options) => {
     const orders = await response.json();
     return orders;
   } catch (error) {
-    console.error("Error fetching orders:", error);
+    console.error("Error fetching orders:", error.message);
     throw error;
   }
 };
@@ -84,18 +93,16 @@ const registrate = async (regData) => {
       }
     );
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Registration successful:", data);
-      return true;
-    } else {
-      const errorData = await response.json();
-      console.error("Registration failed:", errorData);
-      return false;
+    if (!response.ok) {
+      throw new Error("Registration failed!");
     }
+
+    const data = await response.json();
+    console.log("Registration successful:", data);
+    return true;
   } catch (error) {
-    console.error("Error occurred during registration:", error);
-    return false;
+    console.error("Error occurred during registration:", error.message);
+    throw error;
   }
 };
 
@@ -109,18 +116,16 @@ const authorize = async (authData) => {
       body: JSON.stringify(authData),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      return true;
-    } else {
-      const errorData = await response.json();
-      console.error("Authorization failed:", errorData);
-      return false;
+    if (!response.ok) {
+      throw new Error("Authorization failed!");
     }
+
+    const data = await response.json();
+    localStorage.setItem("token", data.token);
+    return true;
   } catch (error) {
-    console.error("Error occurred during authorization:", error);
-    return false;
+    console.error("Error occurred during authorization:", error.message);
+    throw error;
   }
 };
 

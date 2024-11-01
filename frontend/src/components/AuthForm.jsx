@@ -59,10 +59,10 @@ const AuthForm = ({ buttonText, redirectPath, apiCall, regLink }) => {
       return;
     }
 
-    const res = await apiCall(formData);
-    if (res) {
+    try {
+      await apiCall(formData);
       navigate(redirectPath);
-    } else {
+    } catch (error) {
       setErrors((prev) => ({ ...prev, ok: false }));
     }
   };
