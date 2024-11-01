@@ -19,7 +19,7 @@ const Cart = () => {
             <th>Product</th>
             <th>Description</th>
             <th>Amount</th>
-            <th>Line total</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +33,9 @@ const Cart = () => {
             ))}
         </tbody>
       </table>
+      <div className="float-right m-4">
+        <button className="btn btn-wide">Place order</button>
+      </div>
     </div>
   );
 };

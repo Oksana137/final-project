@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchOrders } from "../units/network";
 import OrderRow from "../components/OrderRow";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const [orders, setOrders] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -15,7 +17,13 @@ const Orders = () => {
       },
     };
 
-    fetchOrders(options).then((data) => setOrders(data));
+    fetchOrders(options)
+      .then((data) => setOrders(data))
+      .catch((res) => {
+        if (res.status === 401) {
+          navigate("/login");
+        }
+      });
 
     return () => {
       controller.abort();

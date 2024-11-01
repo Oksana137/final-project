@@ -1,3 +1,5 @@
+import HTTPError from "./HTTPError";
+
 const fetchProducts = async (options) => {
   try {
     const response = await fetch(
@@ -56,13 +58,16 @@ const fetchOrders = async (options) => {
       options
     );
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
     }
     const orders = await response.json();
     return orders;
   } catch (error) {
-    console.error("Error fetching categories:", error);
-    return false;
+    console.error("Error fetching orders:", error);
+    throw error;
   }
 };
 
