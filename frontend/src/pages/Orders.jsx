@@ -23,10 +23,10 @@ const Orders = () => {
   }, []);
 
   return (
-    <>
+    <div className="p-12">
       {orders &&
         orders.map((order) => <OrderRow key={order.id} order={order} />)}
-    </>
+    </div>
   );
 };
 
