@@ -3,7 +3,7 @@ import "./models/associations.js";
 import categoryRouter from "./routes/categoryRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import productRouter from "./routes/productRouter.js";
-import userRouter from "./routes/userRoutes.js";
+import userRouter from "./routes/userRouter.js";
 import authRouter from "./routes/authRouter.js";
 import productCategoryRouter from "./routes/productCategoryRouter.js";
 import cors from "cors";

@@ -80,6 +80,26 @@ const fetchOrders = async (options) => {
   }
 };
 
+const createOrder = async (options) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/orders`,
+      options
+    );
+    if (!response.ok) {
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error creating order:", error.message);
+    throw error;
+  }
+};
+
 const registrate = async (regData) => {
   try {
     const response = await fetch(
@@ -134,6 +154,7 @@ export {
   fetchProductsByCategory,
   fetchCategories,
   fetchOrders,
+  createOrder,
   registrate,
   authorize,
 };

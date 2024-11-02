@@ -29,8 +29,16 @@ Order.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
-Product.belongsToMany(Order, { through: "ProductOrders", as: "orders" });
-Order.belongsToMany(Product, { through: "ProductOrders", as: "products" });
+Product.belongsToMany(Order, {
+  through: "ProductOrders",
+  as: "orders",
+  foreignKey: "productId",
+});
+Order.belongsToMany(Product, {
+  through: "ProductOrders",
+  as: "products",
+  foreignKey: "orderId",
+});
 
 User.sync();
 Category.sync();

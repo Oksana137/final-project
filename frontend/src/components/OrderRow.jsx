@@ -26,7 +26,7 @@ const OrderRow = ({ order }) => {
               <th>Product</th>
               <th>Description</th>
               <th>Quantity</th>
-              <th>Line total</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>

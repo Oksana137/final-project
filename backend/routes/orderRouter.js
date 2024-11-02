@@ -10,7 +10,7 @@ import {
 
 const orderRouter = express.Router();
 
-orderRouter.route("/").get(verifyToken, getOrders).post(createOrder);
+orderRouter.route("/").get(verifyToken, getOrders).post(verifyToken, createOrder);
 orderRouter
   .route("/:id")
   .get(getOrderByID)

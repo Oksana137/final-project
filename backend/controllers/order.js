@@ -1,12 +1,12 @@
 import Order from "../models/Order.js";
 import Category from "../models/Category.js";
 import Product from "../models/Product.js";
+import ProductOrders from "../models/ProductOrders.js";
 import ErrorReponse from "../utils/ErrorResponse.js";
 
 export const getOrders = async (req, res, next) => {
-  const { uid } = req;
-
   try {
+    const { uid } = req;
     const orders = await Order.findAll({
       include: [
         {
@@ -53,11 +53,34 @@ export const getOrderByID = async (req, res, next) => {
 
 export const createOrder = async (req, res, next) => {
   try {
+    console.log({
+      method: req.method,
+      url: req.originalUrl,
+      headers: {
+        host: req.headers.host,
+        userAgent: req.headers["user-agent"],
+        authorization: req.headers.authorization
+          ? "Bearer [REDACTED]"
+          : undefined,
+      },
+      body: req.body,
+    });
+
+    const { uid } = req;
     const { products, total } = req.body;
     if (!products || !total) {
       throw new ErrorReponse("Products and total are required!", 400);
     }
-    const order = await Order.create(req.body);
+    const order = await Order.create({ userId: uid, date: Date.now(), total });
+
+    for (const product of products) {
+      await ProductOrders.create({
+        orderId: order.id,
+        productId: product.id,
+        quantity: product.quantity,
+      });
+    }
+
     res.status(201).json(order);
   } catch (error) {
     next(error);
