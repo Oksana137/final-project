@@ -36,7 +36,7 @@ const Cart = () => {
     };
 
     createOrder(options)
-      .then((res) => {
+      .then(() => {
         localStorage.setItem("cart", JSON.stringify([]));
         setCart(null);
         setCartQuantities(0);
@@ -54,7 +54,7 @@ const Cart = () => {
   };
 
   return (
-    cartQuantities && (
+    cartQuantities > 0 && (
       <div className="overflow-x-auto max-w-7xl m-auto p-8">
         <table className="table">
           <thead>

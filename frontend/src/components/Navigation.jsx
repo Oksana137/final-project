@@ -15,11 +15,6 @@ const Navigation = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to={"/"} className="btn btn-ghost">
-              Home
-            </Link>
-          </li>
-          <li>
             <Link to={"/orders"} className="btn btn-ghost">
               Orders
             </Link>
