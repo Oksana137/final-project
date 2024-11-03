@@ -114,7 +114,10 @@ const registrate = async (regData) => {
     );
 
     if (!response.ok) {
-      throw new Error("Registration failed!");
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
     }
 
     const data = await response.json();
@@ -137,7 +140,10 @@ const authorize = async (authData) => {
     });
 
     if (!response.ok) {
-      throw new Error("Authorization failed!");
+      throw new HTTPError(
+        `HTTP error! Status: ${response.status}`,
+        response.status
+      );
     }
 
     const data = await response.json();
