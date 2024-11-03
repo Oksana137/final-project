@@ -12,18 +12,18 @@ const ProductOrderRow = ({ product }) => {
                     ? import.meta.env.VITE_API_URL + product.image
                     : null
                 }
-                alt={product.title}
+                alt={product.name}
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{product.title}</h2>
-              <p>{product.price} &#36;</p>
+              <h2 className="card-title">{product.name}</h2>
+              <p>{product.price}&#36;</p>
             </div>
           </div>
         </td>
         <td>{product.description}</td>
         <td>{product.ProductOrders.quantity}</td>
-        <td>{product.ProductOrders.quantity * product.price} &#36;</td>
+        <td>{product.ProductOrders.quantity * product.price}&#36;</td>
       </tr>
     )
   );

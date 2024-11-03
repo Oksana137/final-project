@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
         <h2 className="card-title">
           {product.name.split(" ").slice(0, 3).join(" ")}
         </h2>
-        <span>{product.price} &#36;</span>
+        <span>{product.price}&#36;</span>
         <Link to={`/category/${product.category.id}`} className="link">
           {product.category.name}
         </Link>
