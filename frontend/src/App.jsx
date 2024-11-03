@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CartContextProvider from "./contexts/CartContext";
+import AuthContextProvider from "./contexts/AuthContext";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import Products from "./pages/Products";
@@ -30,9 +31,11 @@ function App() {
   );
 
   return (
-    <CartContextProvider>
-      <RouterProvider router={router} />
-    </CartContextProvider>
+    <AuthContextProvider>
+      <CartContextProvider>
+        <RouterProvider router={router} />
+      </CartContextProvider>
+    </AuthContextProvider>
   );
 }
 

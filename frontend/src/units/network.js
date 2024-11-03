@@ -149,6 +149,26 @@ const authorize = async (authData) => {
   }
 };
 
+const isAuthorize = async () => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
+    });
+
+    if (!response.ok) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   fetchProducts,
   fetchProductsByCategory,
@@ -157,4 +177,5 @@ export {
   createOrder,
   registrate,
   authorize,
+  isAuthorize,
 };

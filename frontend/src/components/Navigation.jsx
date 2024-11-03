@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
+import Logout from "./Logout";
 
 const Navigation = () => {
   const { cartQuantities } = useContext(CartContext);
+  const { isAuth } = useContext(AuthContext);
 
   return (
     <div className="navbar bg-base-300 pr-8">
@@ -19,6 +22,11 @@ const Navigation = () => {
               Orders
             </Link>
           </li>
+          {isAuth && (
+            <li>
+              <Logout />
+            </li>
+          )}
         </ul>
         <Link to={"/cart"} role="button" className="btn btn-ghost btn-circle">
           <div className="indicator">

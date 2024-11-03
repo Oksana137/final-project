@@ -44,7 +44,6 @@ const addProductToCart = (product) => {
   }
 };
 
-
 const updateProductInCart = (product) => {
   try {
     getProductsInCart();
@@ -86,6 +85,14 @@ const deleteProductInCart = (product) => {
   }
 };
 
+const logout = () => {
+  try {
+    localStorage.removeItem("token");
+  } catch (error) {
+    console.error("An error occurred while log out:", error);
+  }
+};
+
 export {
   isProductInCart,
   updateAmount,
@@ -94,4 +101,5 @@ export {
   addProductToCart,
   updateProductInCart,
   deleteProductInCart,
+  logout,
 };

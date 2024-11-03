@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { isAuthorize } from "../units/network";
 
 const AuthForm = ({ buttonText, redirectPath, apiCall, regLink }) => {
   const navigate = useNavigate();
+  const { setIsAuth } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -61,6 +66,9 @@ const AuthForm = ({ buttonText, redirectPath, apiCall, regLink }) => {
 
     try {
       await apiCall(formData);
+      if (isAuthorize()) {
+        setIsAuth(true);
+      }
       navigate(redirectPath);
     } catch (error) {
       setErrors((prev) => ({ ...prev, ok: false }));
