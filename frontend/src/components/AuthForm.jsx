@@ -66,9 +66,9 @@ const AuthForm = ({ buttonText, redirectPath, apiCall, regLink }) => {
 
     try {
       await apiCall(formData);
-      if (isAuthorize()) {
-        setIsAuth(true);
-      }
+      isAuthorize().then((status) => {
+        setIsAuth(status);
+      });
       navigate(redirectPath);
     } catch (error) {
       setErrors((prev) => ({ ...prev, ok: false }));

@@ -151,6 +151,8 @@ const authorize = async (authData) => {
 
 const isAuthorize = async () => {
   try {
+    if (!localStorage.getItem("token")) return false;
+
     const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
       method: "GET",
       headers: {
@@ -159,12 +161,13 @@ const isAuthorize = async () => {
       },
     });
 
-    if (!response.ok) {
+    if (response.status == 401) {
       return false;
     }
 
     return true;
   } catch (error) {
+    console.error("Authentication failed.", error);
     throw error;
   }
 };
