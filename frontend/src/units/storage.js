@@ -85,7 +85,7 @@ const deleteProductInCart = (product) => {
   }
 };
 
-const logout = () => {
+const deleteToken = () => {
   try {
     localStorage.removeItem("token");
   } catch (error) {
@@ -101,5 +101,5 @@ export {
   addProductToCart,
   updateProductInCart,
   deleteProductInCart,
-  logout,
+  deleteToken,
 };

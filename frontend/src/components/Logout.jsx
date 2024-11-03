@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { logout } from "../units/storage";
+import { deleteToken } from "../units/storage";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
 
@@ -8,7 +8,7 @@ const Logout = () => {
   const { setIsAuth } = useContext(AuthContext);
 
   const handleLogout = () => {
-    logout();
+    deleteToken();
     setIsAuth(false);
     navigate("/login");
   };
