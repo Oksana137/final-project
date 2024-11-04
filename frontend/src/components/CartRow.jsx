@@ -35,7 +35,7 @@ const CartRow = ({ product, cartQuantities, setCartQuantities }) => {
             setIsInCart={setIsInCart}
           />
         </td>
-        <td>{product.amount * product.price} &#36;</td>
+        <td>{product.amount * product.price}&#36;</td>
       </tr>
     )
   );
