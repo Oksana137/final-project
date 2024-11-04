@@ -15,7 +15,7 @@ const fetchProducts = async (options) => {
     const products = await response.json();
     return products;
   } catch (error) {
-    console.error("Error fetching products:", error.message);
+    // console.error("Error fetching products:", error.message);
     throw error;
   }
 };
@@ -35,7 +35,7 @@ const fetchProductsByCategory = async (options, categoryId) => {
     const products = await response.json();
     return products;
   } catch (error) {
-    console.error("Error fetching products by category:", error.message);
+    // console.error("Error fetching products by category:", error.message);
     throw error;
   }
 };
@@ -55,7 +55,7 @@ const fetchCategories = async (options) => {
     const categories = await response.json();
     return categories;
   } catch (error) {
-    console.error("Error fetching categories:", error.message);
+    // console.error("Error fetching categories:", error.message);
     throw error;
   }
 };
@@ -75,7 +75,7 @@ const fetchOrders = async (options) => {
     const orders = await response.json();
     return orders;
   } catch (error) {
-    console.error("Error fetching orders:", error.message);
+    // console.error("Error fetching orders:", error.message);
     throw error;
   }
 };
@@ -95,7 +95,7 @@ const createOrder = async (options) => {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error("Error creating order:", error.message);
+    // console.error("Error creating order:", error.message);
     throw error;
   }
 };
@@ -173,7 +173,7 @@ const isAuthorize = async () => {
 
     return true;
   } catch (error) {
-    console.error("Authentication failed.", error);
+    // console.error("Authentication failed.", error);
     throw error;
   }
 };

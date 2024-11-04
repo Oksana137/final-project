@@ -42,8 +42,9 @@ const Cart = () => {
         setCartQuantities(0);
         navigate("/orders");
       })
-      .catch((res) => {
-        if (res.status === 401) {
+      .catch((error) => {
+        console.error("Error creating order:", error.message);
+        if (error.status === 401) {
           navigate("/login");
         }
       });
@@ -69,7 +70,7 @@ const Cart = () => {
             {cart &&
               cart.map((product) => (
                 <CartRow
-                  key={product.id} 
+                  key={product.id}
                   product={product}
                   cartQuantities={cartQuantities}
                   setCartQuantities={setCartQuantities}

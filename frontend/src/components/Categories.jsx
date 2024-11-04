@@ -10,7 +10,11 @@ const Categories = () => {
 
     fetchCategories({
       signal: controller.signal,
-    }).then((data) => setCategories(data));
+    })
+      .then((data) => setCategories(data))
+      .catch((error) =>
+        console.error("Error fetching categories:", error.message)
+      );
 
     return () => {
       controller.abort();

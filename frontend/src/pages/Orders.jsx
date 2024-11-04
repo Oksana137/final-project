@@ -19,8 +19,9 @@ const Orders = () => {
 
     fetchOrders(options)
       .then((data) => setOrders(data))
-      .catch((res) => {
-        if (res.status === 401) {
+      .catch((error) => {
+        console.error("Error fetching orders:", error.message);
+        if (error.status === 401) {
           navigate("/login");
         }
       });

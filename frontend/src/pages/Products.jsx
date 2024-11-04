@@ -17,11 +17,17 @@ const Products = () => {
     };
 
     if (categoryName) {
-      fetchProductsByCategory(options, categoryName).then((data) =>
-        setProducts(data)
-      );
+      fetchProductsByCategory(options, categoryName)
+        .then((data) => setProducts(data))
+        .catch((error) =>
+          console.error("Error fetching products by category:", error.message)
+        );
     } else {
-      fetchProducts(options).then((data) => setProducts(data));
+      fetchProducts(options)
+        .then((data) => setProducts(data))
+        .catch((error) =>
+          console.error("Error fetching products:", error.message)
+        );
     }
 
     return () => {

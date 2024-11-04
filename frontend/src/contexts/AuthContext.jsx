@@ -7,9 +7,11 @@ export const AuthContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    isAuthorize().then((status) => {
-      setIsAuth(status);
-    });
+    isAuthorize()
+      .then((status) => {
+        setIsAuth(status);
+      })
+      .catch((error) => console.error("Authentication failed.", error));
   }, []);
 
   return (
