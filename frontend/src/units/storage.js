@@ -1,23 +1,19 @@
-let cart = null;
-
 const getProductsInCart = function () {
-  cart = JSON.parse(localStorage.getItem("cart")) || [];
-  return cart;
+  return JSON.parse(localStorage.getItem("cart")) || [];
 };
 
 const getTotalPrice = function () {
   return localStorage.getItem("totalPrice") || 0;
 };
 
-const isProductInCart = (product) => {
-  getProductsInCart();
+const isProductInCart = (product, cart = getProductsInCart()) => {
   return cart.some((item) => item.id === product.id);
 };
 
-const updateAmount = (product) => {
-  getProductsInCart();
+const applyCartAmountToProduct = (product) => {
+  const cart = getProductsInCart();
 
-  if (!isProductInCart(product)) {
+  if (!isProductInCart(product, cart)) {
     return { ...product, amount: 0 };
   }
 
@@ -26,21 +22,16 @@ const updateAmount = (product) => {
 };
 
 const getCartQuantities = () => {
-  getProductsInCart();
+  const cart = getProductsInCart();
   return cart.reduce((total, product) => total + product.amount, 0);
 };
 
 const addProductToCart = (product) => {
   try {
-    getProductsInCart();
-
-    if (isProductInCart(product)) {
-      updateProductInCart(product);
-    } else {
-      cart.push(product);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateTotalPrice();
-    }
+    const cart = getProductsInCart();
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateTotalPrice();
   } catch (error) {
     console.error(
       "An error occurred while adding the product to the cart:",
@@ -51,7 +42,7 @@ const addProductToCart = (product) => {
 
 const updateProductInCart = (product) => {
   try {
-    getProductsInCart();
+    const cart = getProductsInCart();
 
     if (!isProductInCart(product, cart)) {
       console.log(`There is no product in the cart with id: ${product.id}`);
@@ -73,7 +64,7 @@ const updateProductInCart = (product) => {
 
 const deleteProductInCart = (product) => {
   try {
-    getProductsInCart();
+    const cart = getProductsInCart();
 
     if (!isProductInCart(product, cart)) {
       console.log(`There is no product in the cart with id: ${product.id}`);
@@ -93,7 +84,7 @@ const deleteProductInCart = (product) => {
 
 const updateTotalPrice = () => {
   try {
-    getProductsInCart();
+    const cart = getProductsInCart();
     const totalPrice = cart.reduce((total, product) => {
       return total + product.amount * product.price;
     }, 0);
@@ -113,7 +104,7 @@ const deleteToken = () => {
 
 export {
   isProductInCart,
-  updateAmount,
+  applyCartAmountToProduct,
   getProductsInCart,
   getCartQuantities,
   addProductToCart,
