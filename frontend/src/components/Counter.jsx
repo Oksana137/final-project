@@ -1,9 +1,14 @@
 import { useContext, useState } from "react";
-import { updateProductInCart, deleteProductInCart } from "../units/storage";
+import {
+  updateProductInCart,
+  deleteProductInCart,
+  getTotalPrice,
+} from "../units/storage";
 import { CartContext } from "../contexts/CartContext";
 
 const Counter = ({ product, setIsInCart }) => {
-  const { cartQuantities, setCartQuantities } = useContext(CartContext);
+  const { setTotalPrice, cartQuantities, setCartQuantities } =
+    useContext(CartContext);
   const [amount, setAmount] = useState(product.amount);
 
   const increaseHandle = () => {
@@ -11,6 +16,7 @@ const Counter = ({ product, setIsInCart }) => {
       product.amount = prev + 1;
       updateProductInCart(product);
       setCartQuantities(cartQuantities + 1);
+      setTotalPrice(getTotalPrice());
       return product.amount;
     });
   };
@@ -21,11 +27,13 @@ const Counter = ({ product, setIsInCart }) => {
         deleteProductInCart(product);
         setIsInCart(false);
         setCartQuantities(cartQuantities - 1);
+        setTotalPrice(getTotalPrice());
         return 0;
       }
       product.amount = prev - 1;
       updateProductInCart(product);
       setCartQuantities(cartQuantities - 1);
+      setTotalPrice(getTotalPrice());
       return product.amount;
     });
   };

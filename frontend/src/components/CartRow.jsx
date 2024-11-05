@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Counter from "./Counter";
 
-const CartRow = ({ product, cartQuantities, setCartQuantities }) => {
+const CartRow = ({ product }) => {
   const [isInCart, setIsInCart] = useState(true);
 
   return (
@@ -30,8 +30,6 @@ const CartRow = ({ product, cartQuantities, setCartQuantities }) => {
         <td>
           <Counter
             product={product}
-            cartQuantities={cartQuantities}
-            setCartQuantities={setCartQuantities}
             setIsInCart={setIsInCart}
           />
         </td>

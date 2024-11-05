@@ -16,7 +16,7 @@ const OrderRow = ({ order }) => {
               Order date: <span className="font-bold">{order.date}</span>
             </span>
           </div>
-          {/* <span>Total: {order.total}</span> */}
+          <span>Total: {order.total}&#36;</span>
         </div>
       </div>
       <div className="collapse-content">

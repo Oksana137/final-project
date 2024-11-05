@@ -5,13 +5,17 @@ const getProductsInCart = function () {
   return cart;
 };
 
+const getTotalPrice = function () {
+  return localStorage.getItem("totalPrice") || 0;
+};
+
 const isProductInCart = (product) => {
   getProductsInCart();
   return cart.some((item) => item.id === product.id);
 };
 
 const updateAmount = (product) => {
-  const cart = getProductsInCart();
+  getProductsInCart();
 
   if (!isProductInCart(product)) {
     return { ...product, amount: 0 };
@@ -35,6 +39,7 @@ const addProductToCart = (product) => {
     } else {
       cart.push(product);
       localStorage.setItem("cart", JSON.stringify(cart));
+      updateTotalPrice();
     }
   } catch (error) {
     console.error(
@@ -56,8 +61,8 @@ const updateProductInCart = (product) => {
     const updatedCart = cart.map((item) =>
       item.id === product.id ? product : item
     );
-
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateTotalPrice();
   } catch (error) {
     console.error(
       "An error occurred while updating the product in the cart:",
@@ -77,6 +82,7 @@ const deleteProductInCart = (product) => {
 
     const updatedCart = cart.filter((item) => item.id !== product.id);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateTotalPrice();
   } catch (error) {
     console.error(
       "An error occurred while deleting the product in the cart:",
@@ -85,12 +91,13 @@ const deleteProductInCart = (product) => {
   }
 };
 
-const getTotalPrice = () => {
+const updateTotalPrice = () => {
   try {
+    getProductsInCart();
     const totalPrice = cart.reduce((total, product) => {
       return total + product.amount * product.price;
     }, 0);
-    return totalPrice;
+    localStorage.setItem("totalPrice", totalPrice);
   } catch (error) {
     console.error("An error occurred while calculate the price:", error);
   }
@@ -112,5 +119,6 @@ export {
   addProductToCart,
   updateProductInCart,
   deleteProductInCart,
+  getTotalPrice,
   deleteToken,
 };

@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
 
   const addToCartHandle = () => {
     setIsInCart(true);
-    product.amount = product.amount + 1;
+    product.amount = 1;
     addProductToCart(product);
     setCartQuantities(cartQuantities + 1);
   };

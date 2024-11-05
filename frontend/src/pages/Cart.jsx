@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getProductsInCart } from "../units/storage";
+import { getProductsInCart, getTotalPrice } from "../units/storage";
 import { createOrder } from "../units/network";
 import { CartContext } from "../contexts/CartContext";
 import CartRow from "../components/CartRow";
@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
-  const { cartQuantities, setCartQuantities } = useContext(CartContext);
+  const { totalPrice, setTotalPrice, cartQuantities, setCartQuantities } =
+    useContext(CartContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     setCart(getProductsInCart());
+    setTotalPrice(getTotalPrice());
   }, []);
 
   const placeOrderHandle = () => {
@@ -31,7 +33,7 @@ const Cart = () => {
       },
       body: JSON.stringify({
         products,
-        total: 200,
+        total: totalPrice,
       }),
     };
 
@@ -56,7 +58,7 @@ const Cart = () => {
 
   return (
     cartQuantities > 0 && (
-      <div className="overflow-x-auto max-w-7xl m-auto p-8">
+      <div className="flex flex-col overflow-x-auto max-w-7xl m-auto p-8">
         <table className="table">
           <thead>
             <tr>
@@ -69,23 +71,22 @@ const Cart = () => {
           <tbody>
             {cart &&
               cart.map((product) => (
-                <CartRow
-                  key={product.id}
-                  product={product}
-                  cartQuantities={cartQuantities}
-                  setCartQuantities={setCartQuantities}
-                />
+                <CartRow key={product.id} product={product} />
               ))}
           </tbody>
         </table>
-        <div className="float-right m-4">
-          <button className="btn btn-wide" onClick={placeOrderHandle}>
-            Place order
-          </button>
+        <div className="self-end m-4">
+          {totalPrice && (
+            <div className="mb-4">
+              Total: <span>{totalPrice}&#36;</span>
+            </div>
+          )}
+          <div>
+            <button className="btn btn-wide" onClick={placeOrderHandle}>
+              Place order
+            </button>
+          </div>
         </div>
-        {/* <div>
-          Total: <span>{cart.total}</span>
-        </div> */}
       </div>
     )
   );
