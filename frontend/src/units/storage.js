@@ -85,6 +85,17 @@ const deleteProductInCart = (product) => {
   }
 };
 
+const getTotalPrice = () => {
+  try {
+    const totalPrice = cart.reduce((total, product) => {
+      return total + product.amount * product.price;
+    }, 0);
+    return totalPrice;
+  } catch (error) {
+    console.error("An error occurred while calculate the price:", error);
+  }
+};
+
 const deleteToken = () => {
   try {
     localStorage.removeItem("token");

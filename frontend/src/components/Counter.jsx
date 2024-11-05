@@ -10,23 +10,24 @@ const Counter = ({ product, setIsInCart }) => {
     setAmount((prev) => {
       product.amount = prev + 1;
       updateProductInCart(product);
+      setCartQuantities(cartQuantities + 1);
       return product.amount;
     });
-    setCartQuantities(cartQuantities + 1);
   };
 
   const decreaseHandle = () => {
     setAmount((prev) => {
-      product.amount = prev - 1;
-      if (product.amount === 0) {
+      if (prev === 1) {
         deleteProductInCart(product);
         setIsInCart(false);
-        return null;
+        setCartQuantities(cartQuantities - 1);
+        return 0;
       }
+      product.amount = prev - 1;
       updateProductInCart(product);
+      setCartQuantities(cartQuantities - 1);
       return product.amount;
     });
-    setCartQuantities(cartQuantities - 1);
   };
 
   return (

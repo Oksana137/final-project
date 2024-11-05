@@ -83,6 +83,9 @@ const Cart = () => {
             Place order
           </button>
         </div>
+        {/* <div>
+          Total: <span>{cart.total}</span>
+        </div> */}
       </div>
     )
   );
