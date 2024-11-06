@@ -32,10 +32,17 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="p-12">
-      {orders &&
-        orders.map((order) => <OrderRow key={order.id} order={order} />)}
-    </div>
+    <>
+      {orders ? (
+        <div className="p-12">
+          {orders.map((order) => (
+            <OrderRow key={order.id} order={order} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center m-8">There are no orders.</div>
+      )}
+    </>
   );
 };
 

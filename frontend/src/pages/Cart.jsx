@@ -57,38 +57,42 @@ const Cart = () => {
   };
 
   return (
-    cartQuantities > 0 && (
-      <div className="flex flex-col overflow-x-auto max-w-7xl m-auto p-8">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart &&
-              cart.map((product) => (
-                <CartRow key={product.id} product={product} />
-              ))}
-          </tbody>
-        </table>
-        <div className="self-end m-4">
-          {totalPrice && (
-            <div className="mb-4">
-              Total: <span>{totalPrice}&#36;</span>
+    <>
+      {cartQuantities > 0 ? (
+        <div className="flex flex-col overflow-x-auto max-w-7xl m-auto p-8">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart &&
+                cart.map((product) => (
+                  <CartRow key={product.id} product={product} />
+                ))}
+            </tbody>
+          </table>
+          <div className="self-end m-4">
+            {totalPrice && (
+              <div className="mb-4">
+                Total: <span>{totalPrice}&#36;</span>
+              </div>
+            )}
+            <div>
+              <button className="btn btn-wide" onClick={placeOrderHandle}>
+                Place order
+              </button>
             </div>
-          )}
-          <div>
-            <button className="btn btn-wide" onClick={placeOrderHandle}>
-              Place order
-            </button>
           </div>
         </div>
-      </div>
-    )
+      ) : (
+        <div className="flex justify-center m-8">There are no products in the cart.</div>
+      )}
+    </>
   );
 };
 
